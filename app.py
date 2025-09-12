@@ -4,21 +4,22 @@ app = Flask(__name__)
 
 # ---- Replace with your links ----
 PDF_LINK = "https://drive.google.com/uc?export=download&id=1RS9hI5pjzQrh0dWc0ln-JnzzbyO6AnE0"
-VCF_FILE = "Laxmipati_Sarees.vcf"  # save this file in your project folder
+VCF_FILE = "Laxmipati_Sarees.vcf"  # Save this file in your project folder
 
 @app.route("/")
 def home():
-    # HTML triggers vCard download + redirects to PDF
     html = f"""
     <html>
     <head>
       <title>Laxmipati Sarees</title>
-      <meta http-equiv="refresh" content="5;url={PDF_LINK}" />
     </head>
     <body>
       <h2>Saving Contact + Opening Brochure...</h2>
       <script>
-        // Redirect to vCard download route
+        // 1️⃣ Open PDF in a new tab
+        window.open("{PDF_LINK}", "_blank");
+
+        // 2️⃣ Trigger vCard download in the current tab
         window.location.href = "/download";
       </script>
       <p>If brochure doesn’t open automatically, <a href="{PDF_LINK}" target="_blank">click here</a>.</p>
